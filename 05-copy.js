@@ -8,6 +8,7 @@ var readStream = fs.createReadStream(path.join(__dirname,"./../WebStorm-2016.1.1
 // 创建输出流
 var writeStream = fs.createWriteStream(path.join(__dirname,"./../WebStorm.exe"));
 
+// 第一种方法
 fs.stat(path.join(__dirname,"./../WebStorm-2016.1.1.exe"),(err, stats) => {
     var totalData = 0;
     readStream.on("data",(chunk) => {
@@ -17,3 +18,9 @@ fs.stat(path.join(__dirname,"./../WebStorm-2016.1.1.exe"),(err, stats) => {
         });
     });
 });
+
+
+// 第二种方法 pipe
+readStream
+    .pipe(writeStream);
+
